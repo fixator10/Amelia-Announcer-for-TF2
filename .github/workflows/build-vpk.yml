@@ -1,0 +1,22 @@
+name: "Build VPK"
+
+on: [push]
+
+
+jobs:
+  vpk:
+    name: "Build VPK"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip' # caching pip dependencies
+      - run: pip install vpk
+        name: "Install VPK package with VPK CLI tool"
+      - run: vpk --create . amelia_announcer.vpk
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Valve Pak file
+          path: amelia_announcer.vpk
