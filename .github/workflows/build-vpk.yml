@@ -14,7 +14,9 @@ jobs:
           python-version: '3.9'
       - run: pip install vpk
         name: "Install VPK package with VPK CLI tool"
-      - run: 'vpk --create . amelia_announcer.vpk -re "./\.git/.*" --invert-match'
+      - run: rm -rf .git
+        name: "Cleanup git files"
+      - run: 'vpk --create . amelia_announcer.vpk'
       - uses: actions/upload-artifact@v3
         with:
           name: Valve Pak file
