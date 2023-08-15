@@ -14,7 +14,10 @@ jobs:
           python-version: '3.9'
       - run: pip install vpk
         name: "Install VPK package with VPK CLI tool"
-      - run: rm -rf .git
+      - run: |
+          rm -rf .git
+          rm -rf .github
+          rm -rf README.md
         name: "Cleanup git files"
       - run: 'vpk --create . amelia_announcer.vpk'
       - uses: actions/upload-artifact@v3
